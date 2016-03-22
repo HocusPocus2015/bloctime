@@ -6,10 +6,10 @@
         requireBase: false
     });
     $stateProvider
-      .state("home", {
+      .state("timeTrack", {
         url: "/",
-        controller: "HomeCtrl as home",
-        templateUrl: "/templates/home.html"
+        controller: "TimeTrackCtrl as timeTrack",
+        templateUrl: "/templates/timeTrack.html"
     });
   }
   angular

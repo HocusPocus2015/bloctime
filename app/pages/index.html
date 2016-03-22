@@ -6,13 +6,19 @@
     <link rel="stylesheet" href="/styles/style.css">
   </head>
   <body>
-    <a ui-sref="home">Home</a>
+    <div class="links-container">
+      <a ui-sref="timeTrack">Home</a>
+    </div>
+    
     <ui-view></ui-view>
+    
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
     <script src="/scripts/app.js"></script>
+    <script src="/scripts/controllers/TimeTrackCtrl.js"></script>
+    <script src="/scripts/filters/time.js"></script>
   </body>
 </html>
 
