@@ -1,7 +1,8 @@
 (function() {
   function TimeTrackCtrl($scope, $interval) {
     var ctrl= this;
-    ctrl.totalTime = 1500000;
+    var currentTime = 1500
+    ctrl.totalTime = currentTime;
 
     var timer;
     ctrl.startWorkSession = function() {
@@ -15,18 +16,18 @@
         else {
           ctrl.stopFight();
         }
-      }, 100);
+      }, 1000);
     };
 
-    ctrl.stopFight = function() {
+    ctrl.takeABreak = function() {
       if (angular.isDefined(timer)) {
         $interval.cancel(timer);
         timer = undefined;
       }
     };
 
-    ctrl.resetFight = function() {
-      ctrl.totalTime = 1500000;
+    ctrl.reset = function() {
+      ctrl.totalTime = currentTime;
     };
 
   }
