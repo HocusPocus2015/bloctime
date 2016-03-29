@@ -12,6 +12,10 @@
     
     var timer;
     var completeWorkSessions = 0;
+    
+    var mySound = new buzz.sound("/assets/ding.mp3", {
+      preload: true
+    });
 
     function startWorkSession() {
       vm.working = true;
@@ -23,6 +27,7 @@
           vm.timeLeft = TIMER.BREAK;
           vm.buttonMsg = TIMER.BREAK_MESSAGE;
           vm.working = false;
+          mySound.play();
           completeWorkSessions++;
           if (completeWorkSessions % TIMER.SESSION_COUNT == 0) {
             vm.timeLeft = TIMER.LONGER_BREAK;
@@ -45,6 +50,7 @@
           vm.timeLeft = TIMER.SESSION;
           vm.buttonMsg = TIMER.SESSION_MESSAGE;
           vm.working = false;
+          mySound.play();
         };
       }, 1000);
       vm.buttonMsg = "Timer Running";
