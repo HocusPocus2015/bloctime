@@ -24,6 +24,10 @@
           vm.buttonMsg = TIMER.BREAK_MESSAGE;
           vm.working = false;
           completeWorkSessions++;
+          if (completeWorkSessions % TIMER.SESSION_COUNT == 0) {
+            vm.timeLeft = TIMER.LONGER_BREAK;
+            vm.buttonMsg = TIMER.LONGER_BREAK_MESSAGE;
+          }
         };
       }, 1000);
       vm.buttonMsg = "Timer Running";
