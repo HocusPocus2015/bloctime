@@ -1,14 +1,23 @@
 <div ng-controller="TimeTrackCtrl" ng-app="timeTrack">
-  <div class="row">
-    <div class="col-md-6">
-      <h1>{{ timeTrack.totalTime | formatTime }}</h1>
+  <div class="row" ng-show="!timeTrack.onBreak">
+    <div class="col-md-6" >
+      <h1>{{ timeTrack.timeLeft | formatTime }}</h1>
+      <button class="btn btn-primary btn-lg" type="submit" ng-click="timeTrack.startWorkSession()" ng-disabled="timeTrack.working">{{ timeTrack.buttonMsg }}</button>
     </div>
   </div>
+
+  <div class="row" ng-show="timeTrack.onBreak">
+    <div class="col-md-6">
+      <h1>{{ timeTrack.timeLeft | formatTime }}</h1>
+      <button class="btn btn-primary btn-lg btn-success" type="submit" ng-click="timeTrack.takeABreak()" ng-disabled="timeTrack.working">{{ timeTrack.buttonMsg }}</button>
+    </div>
+  </div>
+  
   <div class="row">
-    <div class="col-md-2">
-      <button class="btn btn-primary btn-lg" type="button" ng-click="timeTrack.startWorkSession()">Start a Work Session</button>
-      <button class="btn btn-danger btn-lg" type="button" ng-click="timeTrack.takeABreak()">Take a Break</button>
-      <button class="btn btn-default btn-info" type="button" ng-click="timeTrack.reset()">Reset</button>
+    <div class="col-md-6">
+      <button class="btn btn-default btn-sm btn-danger" ng-click="timeTrack.reset()">Reset</button>
     </div>
   </div>
 </div>
+
+

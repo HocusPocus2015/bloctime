@@ -1,40 +1,73 @@
 (function() {
-  function TimeTrackCtrl($scope, $interval) {
-    var ctrl= this;
-    var currentTime = 1500
-    ctrl.totalTime = currentTime;
-
+  function TimeTrackCtrl(TIMER, $interval) {
+    var vm= this;
+    
+    vm.timeLeft  = TIMER.SESSION;
+    vm.startWorkSession = startWorkSession;
+    vm.takeABreak = takeABreak;
+    vm.reset = reset;
+    vm.working = false;
+    vm.onBreak = false;
+    vm.buttonMsg = TIMER.SESSION_MESSAGE;
+    
     var timer;
-    ctrl.startWorkSession = function() {
-      console.log("working");
-      if ( angular.isDefined(timer) ) return;
-      
+    var completeWorkSessions = 0;
+
+    function startWorkSession() {
+      vm.working = true;
       timer = $interval(function() {
-        if (ctrl.totalTime > 0) {
-          ctrl.totalTime = ctrl.totalTime- 1;
-        }
-        else {
-          ctrl.stopFight();
-        }
+        vm.timeLeft = vm.timeLeft - 1;
+        if (vm.timeLeft <= 0) {
+          $interval.cancel(timer);
+          vm.onBreak = true;
+          vm.timeLeft = TIMER.BREAK;
+          vm.buttonMsg = TIMER.BREAK_MESSAGE;
+          vm.working = false;
+          completeWorkSessions++;
+        };
       }, 1000);
+      vm.buttonMsg = "Timer Running";
+      return timer;
     };
 
-    ctrl.takeABreak = function() {
-      if (angular.isDefined(timer)) {
-        $interval.cancel(timer);
-        timer = undefined;
-      }
+
+    function takeABreak() {
+      vm.working = true;
+      timer = $interval(function() {
+        vm.timeLeft = vm.timeLeft - 1;
+        if (vm.timeLeft <= 0) {
+          $interval.cancel(timer);
+          vm.onBreak = false;
+          vm.timeLeft = TIMER.SESSION;
+          vm.buttonMsg = TIMER.SESSION_MESSAGE;
+          vm.working = false;
+        };
+      }, 1000);
+      vm.buttonMsg = "Timer Running";
+      return timer;
     };
 
-    ctrl.reset = function() {
-      ctrl.totalTime = currentTime;
-    };
+    function reset() {
+      $interval.cancel(timer);
+      vm.onBreak = false;
+      vm.timeLeft = TIMER.SESSION;
+      vm.buttonMsg = TIMER.SESSION_MESSAGE;
+      vm.working = false;
+    }
+  };
 
-  }
-  
-  
+//  angular.extend(this, {
+//    timeLeft: 'TIMER'.SESSION,
+//    startWorkSession: startWorkSession,
+//    takeABreak: takeABreak,
+//    reset: reset,
+//    working: false,
+//    onBreak: false,
+//    buttonMsg: TIMER.SESSION_MESSAGE
+//  });
+//  
     
   angular
     .module('bloctime')
-    .controller('TimeTrackCtrl', ['$scope', '$interval', TimeTrackCtrl]);
+    .controller('TimeTrackCtrl', ['TIMER', '$interval', TimeTrackCtrl]);
 })();
