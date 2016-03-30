@@ -1,11 +1,11 @@
 <sidebar>
   <form ng-submit="timeTrack.addTask()">
     <h4>Add Task</h4>
-    <input type="text" ng-model="timeTrack.taskText" />
+    <input type="text" ng-model="timeTrack.task.name" />
     <button class ="btn btn-default" type="submit">+</button>
   </form>
   <ul>
-    <li ng-repeat="task in timeTrack.tasks">{{ task.task }}</li>
+    <li ng-repeat="task in timeTrack.tasks | orderBy : '-$id'">{{ task.name }}</li>
   </ul>
 </sidebar>
 

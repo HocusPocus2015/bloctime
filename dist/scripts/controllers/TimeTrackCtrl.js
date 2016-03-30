@@ -1,5 +1,5 @@
 (function() {
-  function TimeTrackCtrl(TIMER, $firebaseArray, $interval) {
+  function TimeTrackCtrl(TIMER, Task, $interval) {
     var vm= this;
     
     vm.timeLeft  = TIMER.SESSION;
@@ -10,25 +10,15 @@
     vm.working = false;
     vm.buttonMsg = TIMER.SESSION_MESSAGE;
     
-    
     vm.tasks = [];
     vm.newTask = {};
     vm.addTask = addTask;
     vm.taskText = "";
+    vm.tasks = Task.all;
     
-    activate();
-    function activate() {
-      var taskRef = new Firebase("https://dazzling-inferno-8817.firebaseio.com//tasks/");
-      vm.tasks = $firebaseArray(taskRef);
-       };
-      
     function addTask() {
-      vm.tasks.$add({
-        task: vm.taskText,
-       });
-      return addTask;
-      vm.taskText = ""
-      activate();
+      Task.add(vm.task);
+      vm.task.name = ""
     };
     
     var timer;
@@ -90,5 +80,5 @@
     
   angular
     .module('bloctime')
-    .controller('TimeTrackCtrl', ['TIMER', '$firebaseArray', '$interval', TimeTrackCtrl]);
+    .controller('TimeTrackCtrl', ['TIMER', 'Task', '$interval', TimeTrackCtrl]);
 })();

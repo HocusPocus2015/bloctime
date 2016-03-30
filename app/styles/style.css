@@ -12,12 +12,16 @@ h1 {
 }
 
 sidebar {
-  height: 600px;
-  line-height: 1em;
+  height: 700px;
+  line-height: 1.5em;
   float: left;
   padding-right: 10px;
   background-color: silver;
   margin-bottom: 0px;
+}
+
+li {
+  list-style-type: none;
 }
 
 button {
