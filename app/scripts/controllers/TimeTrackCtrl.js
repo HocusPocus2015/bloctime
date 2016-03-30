@@ -1,22 +1,12 @@
 (function() {
   function TimeTrackCtrl(TIMER, Task, $interval) {
     var vm= this;
-    
+  
     vm.timeLeft  = TIMER.SESSION;
-    vm.startWorkSession = startWorkSession;
-    vm.takeABreak = takeABreak;
-    vm.reset = reset;
-    vm.onBreak = false;
-    vm.working = false;
     vm.buttonMsg = TIMER.SESSION_MESSAGE;
-    
-    vm.tasks = [];
-    vm.newTask = {};
-    vm.addTask = addTask;
-    vm.taskText = "";
     vm.tasks = Task.all;
     
-    function addTask() {
+    vm.addTask = function() {
       Task.add(vm.task);
       vm.task.name = ""
     };
@@ -28,7 +18,7 @@
       preload: true
     });
 
-    function startWorkSession() {
+    vm.startWorkSession = function() {
       vm.working = true;
       timer = $interval(function() {
         vm.timeLeft = vm.timeLeft - 1;
@@ -50,8 +40,7 @@
       return timer;
     };
 
-
-    function takeABreak() {
+    vm.takeABreak = function() {
       vm.working = true;
       timer = $interval(function() {
         vm.timeLeft = vm.timeLeft - 1;
@@ -68,7 +57,7 @@
       return timer;
     };
 
-    function reset() {
+    vm.reset = function() {
       $interval.cancel(timer);
       vm.onBreak = false;
       vm.timeLeft = TIMER.SESSION;
