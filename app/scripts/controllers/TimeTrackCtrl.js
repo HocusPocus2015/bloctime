@@ -1,14 +1,35 @@
 (function() {
-  function TimeTrackCtrl(TIMER, $interval) {
+  function TimeTrackCtrl(TIMER, $firebaseArray, $interval) {
     var vm= this;
     
     vm.timeLeft  = TIMER.SESSION;
     vm.startWorkSession = startWorkSession;
     vm.takeABreak = takeABreak;
     vm.reset = reset;
-    vm.working = false;
     vm.onBreak = false;
+    vm.working = false;
     vm.buttonMsg = TIMER.SESSION_MESSAGE;
+    
+    
+    vm.tasks = [];
+    vm.newTask = {};
+    vm.addTask = addTask;
+    vm.taskText = "";
+    
+    activate();
+    function activate() {
+      var taskRef = new Firebase("https://dazzling-inferno-8817.firebaseio.com//tasks/");
+      vm.tasks = $firebaseArray(taskRef);
+       };
+      
+    function addTask() {
+      vm.tasks.$add({
+        task: vm.taskText,
+       });
+      return addTask;
+      vm.taskText = ""
+      activate();
+    };
     
     var timer;
     var completeWorkSessions = 0;
@@ -66,18 +87,8 @@
     }
   };
 
-//  angular.extend(this, {
-//    timeLeft: 'TIMER'.SESSION,
-//    startWorkSession: startWorkSession,
-//    takeABreak: takeABreak,
-//    reset: reset,
-//    working: false,
-//    onBreak: false,
-//    buttonMsg: TIMER.SESSION_MESSAGE
-//  });
-//  
     
   angular
     .module('bloctime')
-    .controller('TimeTrackCtrl', ['TIMER', '$interval', TimeTrackCtrl]);
+    .controller('TimeTrackCtrl', ['TIMER', '$firebaseArray', '$interval', TimeTrackCtrl]);
 })();
