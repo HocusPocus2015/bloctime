@@ -67,9 +67,8 @@
       vm.timeLeft = TIMER.SESSION;
       vm.buttonMsg = TIMER.SESSION_MESSAGE;
       vm.working = false;
+    };
       
-
-    }
   };
 
     
