@@ -2,11 +2,14 @@
   <form ng-submit="timeTrack.addTask()">
     <h4>Add Task</h4>
     <input type="text" ng-model="timeTrack.task.name" />
-    <button class ="btn btn-default" type="submit">+</button>
+    <button class="btn btn-default" type="submit">+</button>
   </form>
   <ul>
-    <li ng-repeat="task in timeTrack.tasks | orderBy : '-$id'">{{ task.name }}</li>
+    <li ng-repeat="task in timeTrack.tasks | orderBy : '-$id'">
+      {{ task.name }} <input type="checkbox" ng-model="checked" aria-label="Toggle ngShow"><br/>
+    </li>
   </ul>
+  <button class="btn btn-danger" ng-click="timeTrack.deleteTask()">-</button>
 </sidebar>
 
 <body>

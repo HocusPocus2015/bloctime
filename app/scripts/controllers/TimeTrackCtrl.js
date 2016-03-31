@@ -1,7 +1,7 @@
 (function() {
   function TimeTrackCtrl(TIMER, Task, $interval) {
     var vm= this;
-  
+
     vm.timeLeft  = TIMER.SESSION;
     vm.buttonMsg = TIMER.SESSION_MESSAGE;
     vm.tasks = Task.all;
@@ -9,6 +9,10 @@
     vm.addTask = function() {
       Task.add(vm.task);
       vm.task.name = ""
+    };
+    
+    vm.deleteTask = function() {
+      Task.delete(vm.task);
     };
     
     var timer;
@@ -63,6 +67,8 @@
       vm.timeLeft = TIMER.SESSION;
       vm.buttonMsg = TIMER.SESSION_MESSAGE;
       vm.working = false;
+      
+
     }
   };
 
