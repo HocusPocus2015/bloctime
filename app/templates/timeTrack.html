@@ -1,18 +1,18 @@
-<sidebar>
+<section id="taskSection">
   <form ng-submit="timeTrack.addTask()">
-    <h4>Add Task</h4>
+    <h4>Task History</h4>
     <input type="text" ng-model="timeTrack.task.name" />
-    <button class="btn btn-default" type="submit">+</button>
+    <button class="btn btn-default" type="submit">Add Task</button>
   </form>
   <ul>
     <li ng-repeat="task in timeTrack.tasks | orderBy : '-$id'">
-      {{ task.name }} <input type="checkbox" ng-model="checked" aria-label="Toggle ngShow"><br/>
+      <input type="checkbox" ng-model="checked" aria-label="Toggle ngShow">{{ task.name }}</br>
     </li>
   </ul>
   <button class="btn btn-danger" ng-click="timeTrack.deleteTask()">-</button>
-</sidebar>
+</section>
 
-<body>
+<section id="timerSection">
   <div ng-controller="TimeTrackCtrl" ng-app="timeTrack">
     <div class="row" ng-show="!timeTrack.onBreak">
       <div class="col-md-6" >
@@ -34,7 +34,8 @@
       </div>
     </div>
   </div>
-</body>
+</section>
+
 
 
 
