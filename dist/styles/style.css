@@ -11,36 +11,51 @@ html {
 #taskSection {
   display: inline-block;
   box-sizing: border-box;
-  background-color: silver;
   padding-right: 10px;
   padding-left: 10px;
   margin: 0;
   height: 100%;
   width: 25%;
+  background: #abbaab; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #abbaab , #ffffff); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #abbaab , #ffffff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
 }
-/*
+
+#taskSection input {
+  width: 80%;
+}
 
 #timerSection {
   display: inline-block;
+  margin-left: 20px;
 }
-*/
 
-/*
 #timerSection button {
   display: inline-block;
   float: right;
+  background-color: #003300;
 }
-*/
+
+#timerSection button:hover {
+  background-color: white;
+  color: #003300;
+  border: grey;
+}
 
 h1 {
-  color: white;
+  color: #e6ffe6;
+  font-size: 75px;
 }
 
 li {
   list-style-type: none;
-  margin: 0;
-  height: 100%;
-  width: 25%;
+  margin: 5px;
+  width: 100%
+}
+
+ul {
+  padding: 5px;
 }
 
 
@@ -73,6 +88,10 @@ body {
   background-attachment: fixed;
   margin: 0;
   
+}
+
+div {
+  height: 100%;
 }
 
 
